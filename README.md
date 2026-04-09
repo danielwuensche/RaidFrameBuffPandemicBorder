@@ -9,7 +9,12 @@ I'm playing Resto Druid and don't like switching out the whole party/raid frames
 
 If a buff is refreshed when it has at most 30% of its original duration left, the remaining duration is added onto the new buff duration. When refreshing outside of the pandemic window, the remaining duration gets lost.
 
+### Example Pictures
+
+<img width="410" height="165" alt="image" src="https://github.com/user-attachments/assets/78d38353-63ec-4cac-bca8-fe03b520c442" />
+
 ### License
 
 MIT
+
 
