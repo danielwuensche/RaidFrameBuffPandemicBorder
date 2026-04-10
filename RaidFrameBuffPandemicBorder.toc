@@ -2,7 +2,7 @@
 ## Title: RaidFrameBuffPandemicBorder
 ## Notes: Draw a border around party frame buff icons in the pandemic window
 ## Author: You
-## Version: 0.1
+## Version: 0.1.0
 ## DefaultState: Enabled
 
 RaidFrameBuffPandemicBorder.lua
