@@ -49,6 +49,7 @@ local function IterateMemberFrame(memberFrame)
 		-- iterate over party member frames
 		-- get current memberFrame unit type (player, party1, party2, etc.)
 		local unitToken = memberFrame.displayedUnit
+		local unitAuras = C_UnitAuras.GetUnitAuras(unitToken, "PLAYER, HELPFUL")
 
 		if memberFrame.buffFrames then
 			-- iterate over all buff frames of that units party frame
@@ -70,7 +71,6 @@ local function IterateMemberFrame(memberFrame)
 				-- check if the aura last displayed is still active
 				if border[3] then
 					-- get all buffs of that unit casted by myself
-					local unitAuras = C_UnitAuras.GetUnitAuras(unitToken, "PLAYER, HELPFUL")
 
 					local unitAura = FindUnitAura(unitAuras, border[3])
 					if unitAura then
@@ -86,6 +86,10 @@ local function IterateMemberFrame(memberFrame)
 				end
 			end
 		end
+
+		-- probably not needed
+		unitToken = nil
+		unitAuras = nil
 	end
 end
 
