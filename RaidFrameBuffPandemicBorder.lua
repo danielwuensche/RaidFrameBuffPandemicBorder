@@ -5,6 +5,7 @@ local BORDER_COLOR = { r = 1, g = 0.2, b = 0.2, a = 1 } -- red border
 local BORDER_SIZE = 2
 
 TrackedFrames = {} -- { key: buffFrame, val: borderFrame, shown, auraInstanceID }
+setmetatable(TrackedFrames, { __mode = "k" })
 local timeSinceUpdate = 0
 
 local function CreateBorder(parent)
@@ -96,6 +97,12 @@ end
 local function RunMainRoutine()
 	for _, memberFrame in pairs(CompactPartyFrame.memberUnitFrames) do
 		IterateMemberFrame(memberFrame)
+	end
+
+	for _, memberFrame in pairs(CompactRaidFrameContainer.flowFrames) do
+		if type(memberFrame) == "table" then
+			IterateMemberFrame(memberFrame)
+		end
 	end
 end
 
