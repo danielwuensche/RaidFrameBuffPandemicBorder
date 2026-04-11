@@ -50,10 +50,12 @@ local function IterateMemberFrame(memberFrame)
 	if memberFrame and memberFrame:IsShown() then
 		-- get current memberFrame unit type (player, party1, party2, etc.)
 		local unitToken = memberFrame.displayedUnit
-		local unitAuras = C_UnitAuras.GetUnitAuras(unitToken, "PLAYER, HELPFUL")
 
+		-- get all buffs of that unit casted by myself
+		local unitAuras = C_UnitAuras.GetUnitAuras(unitToken, "PLAYER HELPFUL RAID_IN_COMBAT")
+
+		-- iterate over all buff frames of that units party frame
 		if memberFrame.buffFrames then
-			-- iterate over all buff frames of that units party frame
 			for _, buffFrame in pairs(memberFrame.buffFrames) do
 				if not TrackedFrames[buffFrame] then
 					TrackedFrames[buffFrame] = { CreateBorder(buffFrame), false }
