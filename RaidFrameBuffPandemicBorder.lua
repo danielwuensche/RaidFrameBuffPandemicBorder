@@ -46,8 +46,8 @@ local function FindUnitAura(unitAuras, auraInstanceID)
 end
 
 local function IterateMemberFrame(memberFrame)
+	-- iterate over party member frames
 	if memberFrame and memberFrame:IsShown() then
-		-- iterate over party member frames
 		-- get current memberFrame unit type (player, party1, party2, etc.)
 		local unitToken = memberFrame.displayedUnit
 		local unitAuras = C_UnitAuras.GetUnitAuras(unitToken, "PLAYER, HELPFUL")
@@ -56,24 +56,23 @@ local function IterateMemberFrame(memberFrame)
 			-- iterate over all buff frames of that units party frame
 			for _, buffFrame in pairs(memberFrame.buffFrames) do
 				if not TrackedFrames[buffFrame] then
-					TrackedFrames[buffFrame] = { CreateBorder(buffFrame), false, nil }
+					TrackedFrames[buffFrame] = { CreateBorder(buffFrame), false }
 				end
 
 				local border = TrackedFrames[buffFrame]
 
 				border[2] = false -- set "shown" back to init
-				border[3] = nil -- clear auraInstanceID
+				-- border[3] = nil -- clear auraInstanceID
 
-				-- track auraInstanceID alongside the buffFrame
-				if buffFrame.auraInstanceID then
-					border[3] = buffFrame.auraInstanceID
-				end
+				-- -- track auraInstanceID alongside the buffFrame
+				-- if buffFrame.auraInstanceID then
+				-- 	border[3] = buffFrame.auraInstanceID
+				-- end
 
 				-- check if the aura last displayed is still active
-				if border[3] then
-					-- get all buffs of that unit casted by myself
-
-					local unitAura = FindUnitAura(unitAuras, border[3])
+				if buffFrame:IsShown() and buffFrame.auraInstanceID then
+					-- local unitAura = FindUnitAura(unitAuras, border[3])
+					local unitAura = FindUnitAura(unitAuras, buffFrame.auraInstanceID)
 					if unitAura then
 						-- show border if aura is in pandemic window
 						border[2] = IsInPandemicWindow(unitAura)
@@ -87,10 +86,6 @@ local function IterateMemberFrame(memberFrame)
 				end
 			end
 		end
-
-		-- probably not needed
-		unitToken = nil
-		unitAuras = nil
 	end
 end
 
