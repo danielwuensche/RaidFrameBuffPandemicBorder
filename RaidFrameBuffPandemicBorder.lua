@@ -1,8 +1,8 @@
-local ADDON_NAME = "RaidFrameBuffPandemicBorder"
-local THRESHOLD = 0.30 -- 30% threshold
-local UPDATE_INTERVAL = 0.2 -- seconds between updates
-local BORDER_COLOR = { r = 1, g = 0.2, b = 0.2, a = 1 } -- red border
-local BORDER_SIZE = 2
+local addonName = "RaidFrameBuffPandemicBorder"
+local pandemicThreshold = 0.30 -- 30% threshold
+local updateInterval = 0.2 -- seconds between updates
+local borderColor = { r = 1, g = 0.2, b = 0.2, a = 1 } -- red border
+local borderSize = 2
 
 TrackedFrames = {} -- { key: buffFrame, val: borderFrame, shown, auraInstanceID }
 setmetatable(TrackedFrames, { __mode = "k" })
@@ -10,9 +10,9 @@ local timeSinceUpdate = 0
 
 local function CreateBorder(parent)
 	local border = parent:CreateTexture(nil, "OVERLAY")
-	border:SetPoint("TOPLEFT", parent, "TOPLEFT", -BORDER_SIZE, BORDER_SIZE)
-	border:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", BORDER_SIZE, -BORDER_SIZE)
-	border:SetColorTexture(BORDER_COLOR.r, BORDER_COLOR.g, BORDER_COLOR.b, BORDER_COLOR.a)
+	border:SetPoint("TOPLEFT", parent, "TOPLEFT", -borderSize, borderSize)
+	border:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT", borderSize, -borderSize)
+	border:SetColorTexture(borderColor.r, borderColor.g, borderColor.b, borderColor.a)
 	border:SetDrawLayer("ARTWORK", -1)
 	border:Hide()
 
@@ -25,7 +25,7 @@ local function IsInPandemicWindow(unitAura)
 
 	if duration and duration > 0 then
 		local remaining = expirationTime - GetTime()
-		local remainingThreshold = duration * THRESHOLD
+		local remainingThreshold = duration * pandemicThreshold
 		if remaining > 0 and remaining <= remainingThreshold then
 			return true
 		else
@@ -103,11 +103,11 @@ local function RunMainRoutine()
 	end
 end
 
-local frame = CreateFrame("Frame", ADDON_NAME .. "Frame", UIParent)
+local frame = CreateFrame("Frame", addonName .. "Frame", UIParent)
 
 frame:SetScript("OnUpdate", function(self, elapsed)
 	timeSinceUpdate = timeSinceUpdate + elapsed
-	if timeSinceUpdate >= UPDATE_INTERVAL then
+	if timeSinceUpdate >= updateInterval then
 		timeSinceUpdate = 0
 		RunMainRoutine()
 	end
