@@ -7,7 +7,7 @@ I'm playing Resto Druid and don't like switching out the whole party/raid frames
 
 ### What's the pandemic window?
 
-If a buff is refreshed when it has at most 30% of its original duration left, the remaining duration is added onto the new buff duration. When refreshing outside of the pandemic window, the remaining duration gets lost.
+Pandemic allows Dot/Hot-auras to be effectively extended. When those auras are refreshed, the remaining duration will be added to the new application. An aura can be extended by a maximum of 30% of its original duration. This means, the optimal time to refresh an aura (that pandemic applies to) is within the last 30% of its duration, so no duration gets lost.
 
 ### Example Pictures
 
