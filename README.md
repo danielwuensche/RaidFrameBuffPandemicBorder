@@ -1,5 +1,7 @@
 # RaidFrameBuffPandemicBorder
 
+## Due to further addon restrictions in 12.0.5, this addon is not working anymore and there is no way to restore functionality.
+
 This World of Warcraft addon adds a border to buff icons of party frames, if the remaining buff duration is inside the pandemic window.
 It isn't fancy, but gets the job done.
 
